@@ -8,6 +8,7 @@ package universidadgrupo4.vistas;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo4.control.*;
 import universidadgrupo4.modelo.*;
@@ -102,6 +103,12 @@ public class ViewInscripciones extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(51, 153, 255));
         jLabel4.setText("NOTA:");
 
+        jtNota.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtNotaFocusLost(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 153, 255));
         jLabel5.setText("ACTUALIZAR");
@@ -138,6 +145,12 @@ public class ViewInscripciones extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 153, 255));
         jLabel8.setText("NOTA:");
+
+        jtNota1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtNota1FocusLost(evt);
+            }
+        });
 
         jbActualizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbActualizar.setForeground(new java.awt.Color(51, 153, 255));
@@ -394,6 +407,24 @@ public class ViewInscripciones extends javax.swing.JInternalFrame {
         cd.borrarCursadaDeUnaMateriaDeUnAlumno(id, idM);
         
     }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jtNotaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNotaFocusLost
+        // TODO add your handling code here:
+        String val = "\\d*";
+        if(!jtNota.getText().matches(val)){
+            JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+            jtNota.requestFocus();
+        }
+    }//GEN-LAST:event_jtNotaFocusLost
+
+    private void jtNota1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNota1FocusLost
+        // TODO add your handling code here:
+        String val = "\\d*";
+        if(!jtNota1.getText().matches(val)){
+            JOptionPane.showMessageDialog(this, "Ingrese solo numeros");
+            jtNota1.requestFocus();
+        }
+    }//GEN-LAST:event_jtNota1FocusLost
 
     private void cargarAlumnos(JComboBox e){
         for(Alumno a: ad.traerAlumnos()){

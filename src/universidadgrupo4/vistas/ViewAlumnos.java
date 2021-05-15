@@ -360,7 +360,7 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
 
     private void jtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNombreFocusLost
         // TODO add your handling code here:
-        String val = ".[a-zA-Z]*";
+        String val = "^[a-zA-z][^0-9]+";
         if(!jtNombre.getText().matches(val)){
             JOptionPane.showMessageDialog(this, "Ingrese solo letras");
             jtNombre.requestFocus();
@@ -370,7 +370,7 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
 
     private void jtApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtApellidoFocusLost
         // TODO add your handling code here:
-        String val = ".[a-zA-Z]*";
+        String val = "^[a-zA-z][^0-9]+";
         if(!jtApellido.getText().matches(val)){
             JOptionPane.showMessageDialog(this, "Ingrese solo letras");
             jtApellido.requestFocus();
