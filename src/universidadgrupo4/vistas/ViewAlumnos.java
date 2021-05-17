@@ -22,6 +22,7 @@ import universidadgrupo4.control.AlumnoData;
 public class ViewAlumnos extends javax.swing.JInternalFrame {
     AlumnoData alumnoD;
     private DefaultTableModel tabla;
+    private boolean[] errores = new boolean[3];
 
     /**
      * Creates new form ViewAlumnos
@@ -70,6 +71,12 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
         jdcFecha = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableAlumnos = new javax.swing.JTable();
+        jlError = new javax.swing.JLabel();
+        jlErrorlegajo = new javax.swing.JLabel();
+        jlErrorNombre = new javax.swing.JLabel();
+        jlError1 = new javax.swing.JLabel();
+        jlError2 = new javax.swing.JLabel();
+        jlErrorApellido = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
@@ -185,34 +192,62 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtableAlumnos);
 
+        jlError.setForeground(new java.awt.Color(255, 0, 0));
+        jlError.setEnabled(false);
+
+        jlErrorlegajo.setEnabled(false);
+
+        jlErrorNombre.setEnabled(false);
+
+        jlError1.setForeground(new java.awt.Color(255, 0, 0));
+        jlError1.setEnabled(false);
+
+        jlError2.setForeground(new java.awt.Color(255, 0, 0));
+        jlError2.setEnabled(false);
+
+        jlErrorApellido.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbEstado)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbBuscar))
-                            .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jdcFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlError)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)))
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbBuscar))
+                                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlErrorlegajo)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbEstado)
+                                    .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(39, 39, 39)
+                                .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jlError1)
+                        .addGap(53, 53, 53)
+                        .addComponent(jlErrorNombre)))
                 .addGap(0, 13, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +255,17 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
                         .addGap(177, 177, 177)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addGap(44, 44, 44)
+                        .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jlError2)
+                        .addGap(53, 53, 53)
+                        .addComponent(jlErrorApellido))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jbGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbBorrar)
@@ -243,15 +288,27 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlError)
+                    .addComponent(jlErrorlegajo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlError1)
+                    .addComponent(jlErrorNombre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlError2)
+                    .addComponent(jlErrorApellido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -267,9 +324,9 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
                     .addComponent(jbBorrar)
                     .addComponent(jbActualizar)
                     .addComponent(jbLimpiar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -281,22 +338,29 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-        String fecha = formato.format(jdcFecha.getDate());
-        LocalDate fechain = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        
-        int legajo = Integer.parseInt(jtLegajo.getText());
-        String nombre = jtNombre.getText();
-        String apellido = jtApellido.getText();
-        boolean activo = jcbEstado.isSelected();
-        
-        Alumno alumno = new Alumno(nombre, apellido, fechain, legajo, activo);
-        alumnoD.agregarAlumno(alumno);
-        
-        jtId.setText(String.valueOf(alumno.getIdAlumno()));
-        limpiar();
-        limpiarTabla();
-        llenarTabla();
+        if(jdcFecha.getDate() == null){
+            JOptionPane.showMessageDialog(this, "no hay fecha");
+        }
+        if(!errores[0] && !errores[1] && !errores[2]){
+            SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+            String fecha = formato.format(jdcFecha.getDate());
+            LocalDate fechain = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+            int legajo = Integer.parseInt(jtLegajo.getText());
+            String nombre = jtNombre.getText();
+            String apellido = jtApellido.getText();
+            boolean activo = jcbEstado.isSelected();
+
+            Alumno alumno = new Alumno(nombre, apellido, fechain, legajo, activo);
+            alumnoD.agregarAlumno(alumno);
+
+            jtId.setText(String.valueOf(alumno.getIdAlumno()));
+            limpiar();
+            limpiarTabla();
+            llenarTabla();
+        }else{
+            JOptionPane.showMessageDialog(this, "corriga los errors antes de continuar");
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -352,28 +416,61 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
     private void jtLegajoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtLegajoFocusLost
         // TODO add your handling code here:
         String val = "\\d*";
-        if(!jtLegajo.getText().matches(val)){
-            JOptionPane.showMessageDialog(this, "Ingrese solamente numeros");
-            jtLegajo.requestFocus();
+        if(jtLegajo.getText().isEmpty()){
+            jlError.setEnabled(true);
+            jlError.setText("Error:");
+            jlErrorlegajo.setEnabled(true);
+            jlErrorlegajo.setText("Esta casilla no puede estar vacia.");
+            errores[0] = true;
+        }else if(!jtLegajo.getText().matches(val)){
+            jlError.setEnabled(true);
+            jlError.setText("Error:");
+            jlErrorlegajo.setEnabled(true);
+            jlErrorlegajo.setText("Esta casilla no puede contener letras.");
+            errores[0] = true;
+        }else{
+            jlError.setEnabled(false);
+            jlErrorlegajo.setEnabled(false);
+            jlError.setText("");
+            jlErrorlegajo.setText("");
+            errores[0] = false;
         }
     }//GEN-LAST:event_jtLegajoFocusLost
 
     private void jtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNombreFocusLost
         // TODO add your handling code here:
         String val = "^[a-zA-z][^0-9]+";
-        if(!jtNombre.getText().matches(val)){
-            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
-            jtNombre.requestFocus();
+        if(!jtNombre.getText().matches(val) && !jtNombre.getText().isEmpty()){
+            jlError1.setEnabled(true);
+            jlError1.setText("Error:");
+            jlErrorNombre.setEnabled(true);
+            jlErrorNombre.setText("Esta casilla no puede contener numeros.");
+            errores[1] = true;
+        }else{
+            jlError1.setEnabled(false);
+            jlErrorNombre.setEnabled(false);
+            jlError1.setText("");
+            jlErrorNombre.setText("");
+            errores[1] = false;
         }
         
     }//GEN-LAST:event_jtNombreFocusLost
 
     private void jtApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtApellidoFocusLost
         // TODO add your handling code here:
-        String val = "^[a-zA-z][^0-9]+";
-        if(!jtApellido.getText().matches(val)){
-            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
-            jtApellido.requestFocus();
+        String val = "[a-zA-z][^0-9]+";
+        if(!jtApellido.getText().matches(val) && !jtApellido.getText().isEmpty()){
+            jlError2.setEnabled(true);
+            jlError2.setText("Error:");
+            jlErrorApellido.setEnabled(true);
+            jlErrorApellido.setText("Esta casilla no puede contener numeros.");
+            errores[2] = true;
+        }else{
+            jlError2.setEnabled(false);
+            jlErrorApellido.setEnabled(false);
+            jlError2.setText("");
+            jlErrorApellido.setText("");
+            errores[2] = false;
         }
     }//GEN-LAST:event_jtApellidoFocusLost
    
@@ -436,6 +533,12 @@ public class ViewAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JCheckBox jcbEstado;
     private com.toedter.calendar.JDateChooser jdcFecha;
+    private javax.swing.JLabel jlError;
+    private javax.swing.JLabel jlError1;
+    private javax.swing.JLabel jlError2;
+    private javax.swing.JLabel jlErrorApellido;
+    private javax.swing.JLabel jlErrorNombre;
+    private javax.swing.JLabel jlErrorlegajo;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtLegajo;
