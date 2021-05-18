@@ -13,6 +13,9 @@ import universidadgrupo4.control.MateriaData;
  *
  * @author kevin
  */
+
+//este es comentario para hacer commit porque no funcionaba el push
+
 public class ViewMaterias extends javax.swing.JInternalFrame {
     
     MateriaData materiaD;
